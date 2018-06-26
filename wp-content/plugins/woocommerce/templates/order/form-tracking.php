@@ -10,14 +10,18 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see https://docs.woocommerce.com/document/template-structure/
+ * @see 	https://docs.woocommerce.com/document/template-structure/
+ * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.4.0
+ * @version 3.3.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 global $post;
+
 ?>
 
 <form action="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" method="post" class="track_order">
@@ -29,6 +33,6 @@ global $post;
 	<div class="clear"></div>
 
 	<p class="form-row"><button type="submit" class="button" name="track" value="<?php esc_attr_e( 'Track', 'woocommerce' ); ?>"><?php esc_html_e( 'Track', 'woocommerce' ); ?></button></p>
-	<?php wp_nonce_field( 'woocommerce-order_tracking', 'woocommerce-order-tracking-nonce' ); ?>
+	<?php wp_nonce_field( 'woocommerce-order_tracking' ); ?>
 
 </form>

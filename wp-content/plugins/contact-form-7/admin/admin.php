@@ -251,8 +251,7 @@ function wpcf7_load_contact_form_admin() {
 
 	if ( 'wpcf7-new' == $plugin_page ) {
 		$post = WPCF7_ContactForm::get_template( array(
-			'locale' => isset( $_GET['locale'] ) ? $_GET['locale'] : null,
-		) );
+			'locale' => isset( $_GET['locale'] ) ? $_GET['locale'] : null ) );
 	} elseif ( ! empty( $_GET['post'] ) ) {
 		$post = WPCF7_ContactForm::get_instance( $_GET['post'] );
 	}

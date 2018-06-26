@@ -15,8 +15,7 @@ class PWB_Carousel_Shortcode{
         'items_to_scroll'   => "1",
         'image_size'        => "thumbnail",
         'autoplay'          => "false",
-        'arrows'            => "false",
-        'hide_empty'        => false
+        'arrows'            => "false"
     ), $atts, 'pwb-carousel' );
 
     return \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::render_template(
@@ -44,9 +43,9 @@ class PWB_Carousel_Shortcode{
     $brands = array();
     $foreach_i = 0;
     if( self::$atts['items'] == 'featured' ){
-      $brands_array = \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::get_brands( self::$atts['items'], 'name', 'ASC', true );
+      $brands_array = \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::get_brands( false, 'name', 'ASC', true );
     }else{
-      $brands_array = \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::get_brands( self::$atts['items'] );
+      $brands_array = \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::get_brands();
     }
     foreach( $brands_array as $brand ){
         if( self::$atts['items'] != 'featured' && $foreach_i >= (int)self::$atts['items'] ) break;

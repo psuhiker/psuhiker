@@ -14,7 +14,9 @@
 
 global $states;
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $states['MD'] = array(
 	'C'  => __( 'Chi&#537;in&#259;u', 'woocommerce' ),

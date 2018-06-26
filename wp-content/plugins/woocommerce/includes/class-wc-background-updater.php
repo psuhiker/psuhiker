@@ -2,11 +2,13 @@
 /**
  * Background Updater
  *
- * @version 2.6.0
- * @package WooCommerce/Classes
+ * @version  2.6.0
+ * @package  WooCommerce/Classes
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'WC_Background_Process', false ) ) {
 	include_once dirname( __FILE__ ) . '/abstracts/class-wc-background-process.php';
@@ -93,7 +95,7 @@ class WC_Background_Updater extends WC_Background_Process {
 	 * item from the queue.
 	 *
 	 * @param string $callback Update callback function.
-	 * @return string|bool
+	 * @return mixed
 	 */
 	protected function task( $callback ) {
 		wc_maybe_define_constant( 'WC_UPDATING', true );
@@ -102,22 +104,15 @@ class WC_Background_Updater extends WC_Background_Process {
 
 		include_once dirname( __FILE__ ) . '/wc-update-functions.php';
 
-		$result = false;
-
 		if ( is_callable( $callback ) ) {
 			$logger->info( sprintf( 'Running %s callback', $callback ), array( 'source' => 'wc_db_updates' ) );
-			$result = (bool) call_user_func( $callback );
-
-			if ( $result ) {
-				$logger->info( sprintf( '%s callback needs to run again', $callback ), array( 'source' => 'wc_db_updates' ) );
-			} else {
-				$logger->info( sprintf( 'Finished running %s callback', $callback ), array( 'source' => 'wc_db_updates' ) );
-			}
+			call_user_func( $callback );
+			$logger->info( sprintf( 'Finished %s callback', $callback ), array( 'source' => 'wc_db_updates' ) );
 		} else {
 			$logger->notice( sprintf( 'Could not find %s callback', $callback ), array( 'source' => 'wc_db_updates' ) );
 		}
 
-		return $result ? $callback : false;
+		return false;
 	}
 
 	/**

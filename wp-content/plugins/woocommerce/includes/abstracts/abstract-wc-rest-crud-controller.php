@@ -2,7 +2,8 @@
 /**
  * Abstract Rest CRUD Controller Class
  *
- * @class    WC_REST_CRUD_Controller
+ * @author   Automattic
+ * @category API
  * @package  WooCommerce/Abstracts
  * @version  3.0.0
  */
@@ -39,7 +40,6 @@ abstract class WC_REST_CRUD_Controller extends WC_REST_Posts_Controller {
 	 * @return object WC_Data object or WP_Error object.
 	 */
 	protected function get_object( $id ) {
-		// translators: %s: Class method name.
 		return new WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'woocommerce' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
 
@@ -94,7 +94,7 @@ abstract class WC_REST_CRUD_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get object permalink.
 	 *
-	 * @param  object $object Object.
+	 * @param  object $object
 	 * @return string
 	 */
 	protected function get_permalink( $object ) {
@@ -110,7 +110,6 @@ abstract class WC_REST_CRUD_Controller extends WC_REST_Posts_Controller {
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
-		// translators: %s: Class method name.
 		return new WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'woocommerce' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
 
@@ -123,7 +122,6 @@ abstract class WC_REST_CRUD_Controller extends WC_REST_Posts_Controller {
 	 * @return WP_Error|WC_Data The prepared item, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		// translators: %s: Class method name.
 		return new WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'woocommerce' ), __METHOD__ ), array( 'status' => 405 ) );
 	}
 

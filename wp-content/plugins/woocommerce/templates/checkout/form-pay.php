@@ -10,14 +10,16 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.0
+ * @see      https://docs.woocommerce.com/document/template-structure/
+ * @author   WooThemes
+ * @package  WooCommerce/Templates
+ * @version  3.3.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-$totals = $order->get_order_item_totals();
 ?>
 <form id="order_review" method="post">
 
@@ -56,7 +58,7 @@ $totals = $order->get_order_item_totals();
 			<?php endif; ?>
 		</tbody>
 		<tfoot>
-			<?php if ( $totals ) : ?>
+			<?php if ( $totals = $order->get_order_item_totals() ) : ?>
 				<?php foreach ( $totals as $total ) : ?>
 					<tr>
 						<th scope="row" colspan="2"><?php echo $total['label']; ?></th><?php // @codingStandardsIgnoreLine ?>
@@ -92,7 +94,7 @@ $totals = $order->get_order_item_totals();
 
 			<?php do_action( 'woocommerce_pay_order_after_submit' ); ?>
 
-			<?php wp_nonce_field( 'woocommerce-pay', 'woocommerce-pay-nonce' ); ?>
+			<?php wp_nonce_field( 'woocommerce-pay' ); ?>
 		</div>
 	</div>
 </form>

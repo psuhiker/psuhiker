@@ -43,12 +43,11 @@ class WC_Twenty_Seventeen {
 	public static function enqueue_styles( $styles ) {
 		unset( $styles['woocommerce-general'] );
 
-		$styles['woocommerce-general'] = array(
+		$styles['woocommerce-twenty-seventeen'] = array(
 			'src'     => str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/css/twenty-seventeen.css',
 			'deps'    => '',
 			'version' => WC_VERSION,
 			'media'   => 'all',
-			'has_rtl' => true,
 		);
 
 		return apply_filters( 'woocommerce_twenty_seventeen_styles', $styles );

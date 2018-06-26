@@ -1,4 +1,6 @@
-jQuery( function ( $ ) {
+jQuery.noConflict();
+
+jQuery(document).ready(function( $ ) {
 
   var media_uploader = null;
 

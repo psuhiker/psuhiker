@@ -2,6 +2,8 @@
 /**
  * List tables.
  *
+ * @author   WooCommerce
+ * @category Admin
  * @package  WooCommerce/Admin
  * @version  3.3.0
  */
@@ -64,7 +66,7 @@ abstract class WC_Admin_List_Table {
 		if ( $post_type === $this->list_table_type && 'bottom' === $which ) {
 			$counts = (array) wp_count_posts( $post_type );
 			unset( $counts['auto-draft'] );
-			$count = array_sum( $counts );
+			$count  = array_sum( $counts );
 
 			if ( 0 < $count ) {
 				return;

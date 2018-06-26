@@ -329,7 +329,6 @@ jQuery( function( $ ) {
 				complete: function() {
 					unblock( $form );
 					unblock( $( 'div.cart_totals' ) );
-					$.scroll_to_notices( $( '[role="alert"]' ) );
 				}
 			} );
 		},
@@ -366,18 +365,8 @@ jQuery( function( $ ) {
 
 			// Catch the enter key and don't let it submit the form.
 			if ( 13 === evt.keyCode ) {
-				var $form = $( evt.currentTarget ).parents( 'form' );
-
-				try {
-					// If there are no validation errors, handle the submit.
-					if ( $form[0].checkValidity() ) {
-						evt.preventDefault();
-						this.cart_submit( evt );
-					}
-				} catch( err ) {
-					evt.preventDefault();
-					this.cart_submit( evt );
-				}
+				evt.preventDefault();
+				this.cart_submit( evt );
 			}
 		},
 
@@ -523,7 +512,6 @@ jQuery( function( $ ) {
 				complete: function() {
 					unblock( $form );
 					unblock( $( 'div.cart_totals' ) );
-					$.scroll_to_notices( $( '[role="alert"]' ) );
 				}
 			} );
 		},
@@ -552,7 +540,6 @@ jQuery( function( $ ) {
 				complete: function() {
 					unblock( $form );
 					unblock( $( 'div.cart_totals' ) );
-					$.scroll_to_notices( $( '[role="alert"]' ) );
 				}
 			} );
 		},

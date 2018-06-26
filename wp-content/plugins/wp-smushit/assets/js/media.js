@@ -3,52 +3,59 @@
  *
  *
  */
-(function ($, _) {
+(function( $, _ ) {
 
-    // Local reference to the WordPress media namespace.
-    var smush_media = wp.media;
+	// Local reference to the WordPress media namespace.
+	var smush_media = wp.media;
 
-    if ('undefined' != typeof smush_media.view &&
-        'undefined' != typeof smush_media.view.Attachment.Details.TwoColumn) {
+	if( 'undefined' != typeof smush_media.view &&
+        'undefined' != typeof smush_media.view.Attachment.Details.TwoColumn ) {
         // Local instance of the Attachment Details TwoColumn used in the edit attachment modal view
         var smushMediaTwoColumn = smush_media.view.Attachment.Details.TwoColumn;
 
         /**
-         /*
          * Add Smush details to attachment.
          */
         smush_media.view.Attachment.Details.TwoColumn = smushMediaTwoColumn.extend({
 
-            initialize: function () {
-                // Always make sure that our content is up to date.
-                this.model.on('change', this.render, this);
+            render: function () {
+                // Get Smush status for the image
+                this.getSmushDetails(this.model.get('id'));
             },
 
-            render: function () {
-                // Ensure that the main attachment fields are rendered.
-                smush_media.view.Attachment.prototype.render.apply(this, arguments);
+            getSmushDetails: function (id) {
+                wp.ajax.send('smush_get_attachment_details', {
+                    data: {
+                        _nonce: smush_vars.nonce.get_smush_status,
+                        id: id
+                    }
+                }).done(_.bind(this.renderSmush, this));
+            },
 
-                if (typeof (this.model.get('smush')) == 'undefined') {
-                    return this;
+            renderSmush: function (response) {
+                // Render parent media.view.Attachment.Details
+                smushMediaTwoColumn.prototype.render.apply(this);
+
+                this.renderSmushStatus(response);
+            },
+
+            renderSmushStatus: function (response) {
+                if (!response) {
+                    return;
                 }
+                var $detailsHtml = this.$el.find('.attachment-compat');
+                var html = this.generateHTML(response);
+                $detailsHtml.append(html);
+            },
 
-                // Detach the views, append our custom fields, make sure that our data is fully updated and re-render the updated view.
-                this.views.detach();
-
-                var $detailsHtml = this.$el.find('.settings');
-
-                //Create the template
+            generateHTML: function (response) {
                 var template = _.template('<label class="setting smush-stats" data-setting="description"><span class="name"><%= label %></span><span class="value"><%= value %></span></label>');
                 var html = template({
                     label: smush_vars.strings['stats_label'],
-                    value: this.model.get('smush')
+                    value: response
                 });
 
-                $detailsHtml.append(html);
-                this.model.fetch();
-                this.views.render();
-
-                return this;
+                return html;
             }
         });
     }
@@ -59,36 +66,47 @@
     /**
      * Add Smush details to attachment.
      */
-    smush_media.view.Attachment.Details = smushAttachmentDetails.extend({
+    smush_media.view.Attachment.Details = smushAttachmentDetails.extend( {
 
-        initialize: function () {
-            // Always make sure that our content is up to date.
-            this.model.on('change', this.render, this);
+        render: function() {
+            // Get Smush status for the image
+            this.getSmushDetails( this.model.get('id') );
         },
-        render: function () {
-            // Ensure that the main attachment fields are rendered.
-            smush_media.view.Attachment.prototype.render.apply(this, arguments);
 
-            if (typeof (this.model.get('smush')) == 'undefined') {
-                return this;
+        getSmushDetails: function( id ) {
+            wp.ajax.send( 'smush_get_attachment_details', {
+                data: {
+                    _nonce: smush_vars.nonce.get_smush_status,
+                    id: id
+                }
+            } ).done( _.bind( this.renderSmush, this ) );
+        },
+
+        renderSmush: function( response ) {
+            // Render parent media.view.Settings.AttachmentDisplay
+            smushAttachmentDetails.prototype.render.apply( this );
+
+            this.renderSmushStatus( response );
+        },
+
+        renderSmushStatus: function( response ) {
+            if ( ! response ) {
+                return;
             }
+            var $detailsHtml = this.$el.parent().find('.compat-item');
+            var html = this.generateHTML( response );
+            $detailsHtml.append( html );
+        },
 
-            // Detach the views, append our custom fields, make sure that our data is fully updated and re-render the updated view.
-            this.views.detach();
-
+        generateHTML: function (response) {
             var template = _.template('<label class="setting smush-stats" data-setting="description"><span class="name"><%= label %></span><span class="value"><%= value %></span></label>');
             var html = template({
                 label: smush_vars.strings['stats_label'],
-                value: this.model.get('smush')
+                value: response
             });
 
-            this.$el.append(html);
-
-            this.model.fetch();
-            this.views.render();
-
-            return this;
+            return html;
         }
-    });
+    } );
 
-})(jQuery, _);
+})( jQuery, _ );

@@ -4,11 +4,15 @@
  *
  * Handles requests to the /settings/$group/$setting endpoints.
  *
- * @package WooCommerce/API
- * @since   3.0.0
+ * @author   WooThemes
+ * @category API
+ * @package  WooCommerce/API
+ * @since    3.0.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * REST API Setting Options controller class.
@@ -20,8 +24,6 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 
 	/**
 	 * WP REST API namespace/version.
-	 *
-	 * @var string
 	 */
 	protected $namespace = 'wc/v2';
 
@@ -38,74 +40,68 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * @since 3.0.0
 	 */
 	public function register_routes() {
-		register_rest_route(
-			$this->namespace, '/' . $this->rest_base, array(
-				'args'   => array(
-					'group' => array(
-						'description' => __( 'Settings group ID.', 'woocommerce' ),
-						'type'        => 'string',
-					),
+		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
+			'args' => array(
+				'group' => array(
+					'description' => __( 'Settings group ID.', 'woocommerce' ),
+					'type'        => 'string',
 				),
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_items' ),
-					'permission_callback' => array( $this, 'get_items_permissions_check' ),
-				),
-				'schema' => array( $this, 'get_public_item_schema' ),
-			)
-		);
+			),
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_items' ),
+				'permission_callback' => array( $this, 'get_items_permissions_check' ),
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
 
-		register_rest_route(
-			$this->namespace, '/' . $this->rest_base . '/batch', array(
-				'args'   => array(
-					'group' => array(
-						'description' => __( 'Settings group ID.', 'woocommerce' ),
-						'type'        => 'string',
-					),
+		register_rest_route( $this->namespace, '/' . $this->rest_base . '/batch', array(
+			'args' => array(
+				'group' => array(
+					'description' => __( 'Settings group ID.', 'woocommerce' ),
+					'type'        => 'string',
 				),
-				array(
-					'methods'             => WP_REST_Server::EDITABLE,
-					'callback'            => array( $this, 'batch_items' ),
-					'permission_callback' => array( $this, 'update_items_permissions_check' ),
-					'args'                => $this->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
-				),
-				'schema' => array( $this, 'get_public_batch_schema' ),
-			)
-		);
+			),
+			array(
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'batch_items' ),
+				'permission_callback' => array( $this, 'update_items_permissions_check' ),
+				'args'                => $this->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
+			),
+			'schema' => array( $this, 'get_public_batch_schema' ),
+		) );
 
-		register_rest_route(
-			$this->namespace, '/' . $this->rest_base . '/(?P<id>[\w-]+)', array(
-				'args'   => array(
-					'group' => array(
-						'description' => __( 'Settings group ID.', 'woocommerce' ),
-						'type'        => 'string',
-					),
-					'id'    => array(
-						'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
-						'type'        => 'string',
-					),
+		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\w-]+)', array(
+			'args' => array(
+				'group' => array(
+					'description' => __( 'Settings group ID.', 'woocommerce' ),
+					'type'        => 'string',
 				),
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_item' ),
-					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				'id' => array(
+					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
+					'type'        => 'string',
 				),
-				array(
-					'methods'             => WP_REST_Server::EDITABLE,
-					'callback'            => array( $this, 'update_item' ),
-					'permission_callback' => array( $this, 'update_items_permissions_check' ),
-					'args'                => $this->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
-				),
-				'schema' => array( $this, 'get_public_item_schema' ),
-			)
-		);
+			),
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_item' ),
+				'permission_callback' => array( $this, 'get_items_permissions_check' ),
+			),
+			array(
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'update_item' ),
+				'permission_callback' => array( $this, 'update_items_permissions_check' ),
+				'args'                => $this->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
+		) );
 	}
 
 	/**
 	 * Return a single setting.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request Request data.
+	 * @param  WP_REST_Request $request
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_item( $request ) {
@@ -124,7 +120,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * Return all settings in a group.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request Request data.
+	 * @param  WP_REST_Request $request
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_items( $request ) {
@@ -140,7 +136,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 			$setting = $this->prepare_item_for_response( $setting_obj, $request );
 			$setting = $this->prepare_response_for_collection( $setting );
 			if ( $this->is_setting_type_valid( $setting['type'] ) ) {
-				$data[] = $setting;
+				$data[]  = $setting;
 			}
 		}
 
@@ -170,7 +166,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 			$option_key = $setting['option_key'];
 			$setting    = $this->filter_setting( $setting );
 			$default    = isset( $setting['default'] ) ? $setting['default'] : '';
-			// Get the option value.
+			// Get the option value
 			if ( is_array( $option_key ) ) {
 				$option           = get_option( $option_key[0] );
 				$setting['value'] = isset( $option[ $option_key[1] ] ) ? $option[ $option_key[1] ] : $default;
@@ -208,8 +204,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 		$output = array();
 
 		foreach ( $countries as $key => $value ) {
-			$states = WC()->countries->get_states( $key );
-			if ( $states ) {
+			if ( $states = WC()->countries->get_states( $key ) ) {
 				foreach ( $states as $state_key => $state_value ) {
 					$output[ $key . ':' . $state_key ] = $value . ' - ' . $state_value;
 				}
@@ -286,7 +281,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * Update a single setting in a group.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request Request data.
+	 * @param  WP_REST_Request $request
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function update_item( $request ) {
@@ -313,7 +308,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 			$prev[ $option_key[1] ] = $request['value'];
 			update_option( $option_key[0], $prev );
 		} else {
-			$update_data                           = array();
+			$update_data = array();
 			$update_data[ $setting['option_key'] ] = $value;
 			$setting['value']                      = $value;
 			WC_Admin_Settings::save_fields( array( $setting ), $update_data );
@@ -328,7 +323,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * Prepare a single setting object for response.
 	 *
 	 * @since  3.0.0
-	 * @param object          $item Setting object.
+	 * @param object $item Setting object.
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_REST_Response $response Response data.
 	 */
@@ -351,9 +346,9 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * @return array Links for the given setting.
 	 */
 	protected function prepare_links( $setting_id, $group_id ) {
-		$base  = str_replace( '(?P<group_id>[\w-]+)', $group_id, $this->rest_base );
+		$base     = str_replace( '(?P<group_id>[\w-]+)', $group_id, $this->rest_base );
 		$links = array(
-			'self'       => array(
+			'self' => array(
 				'href' => rest_url( sprintf( '/%s/%s/%s', $this->namespace, $base, $setting_id ) ),
 			),
 			'collection' => array(
@@ -399,7 +394,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * only return known values via the API.
 	 *
 	 * @since 3.0.0
-	 * @param  array $setting Settings.
+	 * @param  array $setting
 	 * @return array
 	 */
 	public function filter_setting( $setting ) {
@@ -425,7 +420,7 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 *
 	 * @todo remove in 4.0
 	 * @since 3.0.0
-	 * @param  array $setting Settings.
+	 * @param  array $setting
 	 * @return array
 	 */
 	public function cast_image_width( $setting ) {
@@ -443,50 +438,46 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 * Callback for allowed keys for each setting response.
 	 *
 	 * @since  3.0.0
-	 * @param  string $key Key to check.
+	 * @param  string $key Key to check
 	 * @return boolean
 	 */
 	public function allowed_setting_keys( $key ) {
-		return in_array(
-			$key, array(
-				'id',
-				'label',
-				'description',
-				'default',
-				'tip',
-				'placeholder',
-				'type',
-				'options',
-				'value',
-				'option_key',
-			)
-		);
+		return in_array( $key, array(
+			'id',
+			'label',
+			'description',
+			'default',
+			'tip',
+			'placeholder',
+			'type',
+			'options',
+			'value',
+			'option_key',
+		) );
 	}
 
 	/**
 	 * Boolean for if a setting type is a valid supported setting type.
 	 *
 	 * @since  3.0.0
-	 * @param  string $type Type.
+	 * @param  string $type
 	 * @return bool
 	 */
 	public function is_setting_type_valid( $type ) {
-		return in_array(
-			$type, array(
-				'text',         // Validates with validate_setting_text_field.
-				'email',        // Validates with validate_setting_text_field.
-				'number',       // Validates with validate_setting_text_field.
-				'color',        // Validates with validate_setting_text_field.
-				'password',     // Validates with validate_setting_text_field.
-				'textarea',     // Validates with validate_setting_textarea_field.
-				'select',       // Validates with validate_setting_select_field.
-				'multiselect',  // Validates with validate_setting_multiselect_field.
-				'radio',        // Validates with validate_setting_radio_field (-> validate_setting_select_field).
-				'checkbox',     // Validates with validate_setting_checkbox_field.
-				'image_width',  // Validates with validate_setting_image_width_field.
-				'thumbnail_cropping', // Validates with validate_setting_text_field.
-			)
-		);
+		return in_array( $type, array(
+			'text',         // Validates with validate_setting_text_field.
+			'email',        // Validates with validate_setting_text_field.
+			'number',       // Validates with validate_setting_text_field.
+			'color',        // Validates with validate_setting_text_field.
+			'password',     // Validates with validate_setting_text_field.
+			'textarea',     // Validates with validate_setting_textarea_field.
+			'select',       // Validates with validate_setting_select_field.
+			'multiselect',  // Validates with validate_setting_multiselect_field.
+			'radio',        // Validates with validate_setting_radio_field (-> validate_setting_select_field).
+			'checkbox',     // Validates with validate_setting_checkbox_field.
+			'image_width',  // Validates with validate_setting_image_width_field.
+			'thumbnail_cropping', // Validates with validate_setting_text_field.
+		) );
 	}
 
 	/**
@@ -497,77 +488,77 @@ class WC_REST_Setting_Options_Controller extends WC_REST_Controller {
 	 */
 	public function get_item_schema() {
 		$schema = array(
-			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => 'setting',
-			'type'       => 'object',
-			'properties' => array(
-				'id'          => array(
-					'description' => __( 'A unique identifier for the setting.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+			'$schema'              => 'http://json-schema.org/draft-04/schema#',
+			'title'                => 'setting',
+			'type'                 => 'object',
+			'properties'           => array(
+				'id'               => array(
+					'description'  => __( 'A unique identifier for the setting.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_title',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'label'       => array(
-					'description' => __( 'A human readable label for the setting used in interfaces.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+				'label'            => array(
+					'description'  => __( 'A human readable label for the setting used in interfaces.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'description' => array(
-					'description' => __( 'A human readable description for the setting used in interfaces.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+				'description'      => array(
+					'description'  => __( 'A human readable description for the setting used in interfaces.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'value'       => array(
-					'description' => __( 'Setting value.', 'woocommerce' ),
-					'type'        => 'mixed',
-					'context'     => array( 'view', 'edit' ),
+				'value'          => array(
+					'description'  => __( 'Setting value.', 'woocommerce' ),
+					'type'         => 'mixed',
+					'context'      => array( 'view', 'edit' ),
 				),
-				'default'     => array(
-					'description' => __( 'Default value for the setting.', 'woocommerce' ),
-					'type'        => 'mixed',
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+				'default'          => array(
+					'description'  => __( 'Default value for the setting.', 'woocommerce' ),
+					'type'         => 'mixed',
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'tip'         => array(
-					'description' => __( 'Additional help text shown to the user about the setting.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+				'tip'              => array(
+					'description'  => __( 'Additional help text shown to the user about the setting.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'placeholder' => array(
-					'description' => __( 'Placeholder text to be displayed in text inputs.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+				'placeholder'      => array(
+					'description'  => __( 'Placeholder text to be displayed in text inputs.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'readonly'     => true,
 				),
-				'type'        => array(
-					'description' => __( 'Type of setting.', 'woocommerce' ),
-					'type'        => 'string',
-					'arg_options' => array(
+				'type'             => array(
+					'description'  => __( 'Type of setting.', 'woocommerce' ),
+					'type'         => 'string',
+					'arg_options'  => array(
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'context'     => array( 'view', 'edit' ),
-					'enum'        => array( 'text', 'email', 'number', 'color', 'password', 'textarea', 'select', 'multiselect', 'radio', 'image_width', 'checkbox', 'thumbnail_cropping' ),
-					'readonly'    => true,
+					'context'      => array( 'view', 'edit' ),
+					'enum'         => array( 'text', 'email', 'number', 'color', 'password', 'textarea', 'select', 'multiselect', 'radio', 'image_width', 'checkbox', 'thumbnail_cropping' ),
+					'readonly'     => true,
 				),
-				'options'     => array(
+				'options'          => array(
 					'description' => __( 'Array of options (key value pairs) for inputs such as select, multiselect, and radio buttons.', 'woocommerce' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),

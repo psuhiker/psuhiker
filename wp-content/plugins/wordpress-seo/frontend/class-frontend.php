@@ -1418,16 +1418,7 @@ class WPSEO_Frontend {
 			return false;
 		}
 
-		/**
-		 * Allow the developer to change the target redirection URL for attachments.
-		 *
-		 * @api   string $attachment_url The attachment URL for the queried object.
-		 * @api   object $queried_object The queried object.
-		 *
-		 * @since 7.5.3
-		 */
-		$url = apply_filters( 'wpseo_attachment_redirect_url', wp_get_attachment_url( get_queried_object_id() ), get_queried_object() );
-
+		$url = wp_get_attachment_url( get_queried_object_id() );
 
 		if ( ! empty( $url ) ) {
 			$this->redirect( $url, 301 );

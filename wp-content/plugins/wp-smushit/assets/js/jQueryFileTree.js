@@ -71,7 +71,7 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
       }
       if ($ev.parent().hasClass('directory')) {
           //Add a selected class to directory, Thanks to shortpixel for the modification in here
-        _this.jqft.container.find('LI').removeClass('selected');
+        _this.jqft.container.find('LI.directory').removeClass('selected');
         $ev.parent().addClass('selected');
 
         if ($ev.parent().hasClass('collapsed')) {
@@ -103,23 +103,16 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
           });
         }
       } else {
-        if (!options.multiSelect && ! $ev.parent().hasClass('file') ) {
+        if (!options.multiSelect) {
           jqft.container.find('li').removeClass('selected');
           $ev.parent().addClass('selected');
         } else {
-          jqft.container.find('li.directory').removeClass('selected');
           if ($ev.parent().find('input').is(':checked')) {
             $ev.parent().find('input').prop('checked', false);
             $ev.parent().removeClass('selected');
           } else {
-
-            //If the element already have selected class, reset it
-            if( $ev.parent().hasClass('selected') ) {
-              $ev.parent().removeClass('selected');
-            }else {
-                $ev.parent().find('input').prop('checked', true);
-                $ev.parent().addClass('selected');
-            }
+            $ev.parent().find('input').prop('checked', true);
+            $ev.parent().addClass('selected');
           }
         }
         _this._trigger('filetreeclicked', _this.data);

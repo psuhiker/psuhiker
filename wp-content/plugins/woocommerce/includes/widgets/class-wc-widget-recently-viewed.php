@@ -1,15 +1,17 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Recent Products Widget.
  *
- * @package WooCommerce/Widgets
- * @version 3.3.0
- */
-
-defined( 'ABSPATH' ) || exit;
-
-/**
- * Widget recently viewed.
+ * @author   WooThemes
+ * @category Widgets
+ * @package  WooCommerce/Widgets
+ * @version  3.3.0
+ * @extends  WC_Widget
  */
 class WC_Widget_Recently_Viewed extends WC_Widget {
 
@@ -44,11 +46,13 @@ class WC_Widget_Recently_Viewed extends WC_Widget {
 	 * Output widget.
 	 *
 	 * @see WP_Widget
-	 * @param array $args     Arguments.
-	 * @param array $instance Widget instance.
+	 *
+	 * @param array $args
+	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		$viewed_products = ! empty( $_COOKIE['woocommerce_recently_viewed'] ) ? (array) explode( '|', wp_unslash( $_COOKIE['woocommerce_recently_viewed'] ) ) : array(); // @codingStandardsIgnoreLine
+
+		$viewed_products = ! empty( $_COOKIE['woocommerce_recently_viewed'] ) ? (array) explode( '|', $_COOKIE['woocommerce_recently_viewed'] ) : array();
 		$viewed_products = array_reverse( array_filter( array_map( 'absint', $viewed_products ) ) );
 
 		if ( empty( $viewed_products ) ) {
@@ -76,7 +80,7 @@ class WC_Widget_Recently_Viewed extends WC_Widget {
 					'terms'    => 'outofstock',
 					'operator' => 'NOT IN',
 				),
-			); // WPCS: slow query ok.
+			);
 		}
 
 		$r = new WP_Query( apply_filters( 'woocommerce_recently_viewed_products_widget_query_args', $query_args ) );
@@ -105,6 +109,6 @@ class WC_Widget_Recently_Viewed extends WC_Widget {
 
 		$content = ob_get_clean();
 
-		echo $content; // WPCS: XSS ok.
+		echo $content;
 	}
 }

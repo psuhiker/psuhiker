@@ -3,7 +3,9 @@
  * Webhook Data Store Interface
  *
  * @version  3.2.0
- * @package  WooCommerce/Interface
+ * @package  WooCommerce/Classes/Interfaces
+ * @category Interface
+ * @author   Automattic
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

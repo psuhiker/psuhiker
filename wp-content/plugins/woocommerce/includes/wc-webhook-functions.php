@@ -2,11 +2,13 @@
 /**
  * WooCommerce Webhook functions
  *
- * @package WooCommerce/Functions
- * @version 3.3.0
+ * @package  WooCommerce/Functions
+ * @version  3.3.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Process webhook delivery.

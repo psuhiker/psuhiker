@@ -277,30 +277,10 @@ class WC_Shortcode_Products {
 	 */
 	protected function set_attributes_query_args( &$query_args ) {
 		if ( ! empty( $this->attributes['attribute'] ) || ! empty( $this->attributes['terms'] ) ) {
-			$taxonomy = strstr( $this->attributes['attribute'], 'pa_' ) ? sanitize_title( $this->attributes['attribute'] ) : 'pa_' . sanitize_title( $this->attributes['attribute'] );
-			$terms    = $this->attributes['terms'] ? array_map( 'sanitize_title', explode( ',', $this->attributes['terms'] ) ) : array();
-			$field    = 'slug';
-
-			if ( $terms && is_numeric( $terms[0] ) ) {
-				$terms = array_map( 'absint', $terms );
-				$field = 'term_id';
-			}
-
-			// If no terms were specified get all products that are in the attribute taxonomy.
-			if ( ! $terms ) {
-				$terms = get_terms(
-					array(
-						'taxonomy' => $taxonomy,
-						'fields'   => 'ids',
-					)
-				);
-				$field = 'term_id';
-			}
-
 			$query_args['tax_query'][] = array(
-				'taxonomy' => $taxonomy,
-				'terms'    => $terms,
-				'field'    => $field,
+				'taxonomy' => strstr( $this->attributes['attribute'], 'pa_' ) ? sanitize_title( $this->attributes['attribute'] ) : 'pa_' . sanitize_title( $this->attributes['attribute'] ),
+				'terms'    => array_map( 'sanitize_title', explode( ',', $this->attributes['terms'] ) ),
+				'field'    => 'slug',
 				'operator' => $this->attributes['terms_operator'],
 			);
 		}
@@ -314,18 +294,10 @@ class WC_Shortcode_Products {
 	 */
 	protected function set_categories_query_args( &$query_args ) {
 		if ( ! empty( $this->attributes['category'] ) ) {
-			$categories = array_map( 'sanitize_title', explode( ',', $this->attributes['category'] ) );
-			$field      = 'slug';
-
-			if ( is_numeric( $categories[0] ) ) {
-				$categories = array_map( 'absint', $categories );
-				$field      = 'term_id';
-			}
-
 			$query_args['tax_query'][] = array(
 				'taxonomy' => 'product_cat',
-				'terms'    => $categories,
-				'field'    => $field,
+				'terms'    => array_map( 'sanitize_title', explode( ',', $this->attributes['category'] ) ),
+				'field'    => 'slug',
 				'operator' => $this->attributes['cat_operator'],
 			);
 		}
@@ -574,25 +546,22 @@ class WC_Shortcode_Products {
 		ob_start();
 
 		if ( $products && $products->ids ) {
-			// Prime caches to reduce future queries.
-			if ( is_callable( '_prime_post_caches' ) ) {
-				_prime_post_caches( $products->ids );
-			}
+			// Prime meta cache to reduce future queries.
+			update_meta_cache( 'post', $products->ids );
+			update_object_term_cache( $products->ids, 'product' );
 
 			// Setup the loop.
-			wc_setup_loop(
-				array(
-					'columns'      => $columns,
-					'name'         => $this->type,
-					'is_shortcode' => true,
-					'is_search'    => false,
-					'is_paginated' => wc_string_to_bool( $this->attributes['paginate'] ),
-					'total'        => $products->total,
-					'total_pages'  => $products->total_pages,
-					'per_page'     => $products->per_page,
-					'current_page' => $products->current_page,
-				)
-			);
+			wc_setup_loop( array(
+				'columns'      => $columns,
+				'name'         => $this->type,
+				'is_shortcode' => true,
+				'is_search'    => false,
+				'is_paginated' => wc_string_to_bool( $this->attributes['paginate'] ),
+				'total'        => $products->total,
+				'total_pages'  => $products->total_pages,
+				'per_page'     => $products->per_page,
+				'current_page' => $products->current_page,
+			) );
 
 			$original_post = $GLOBALS['post'];
 

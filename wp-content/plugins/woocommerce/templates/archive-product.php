@@ -10,12 +10,15 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.0
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     3.3.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 get_header( 'shop' );
 
@@ -45,7 +48,8 @@ do_action( 'woocommerce_before_main_content' );
 	?>
 </header>
 <?php
-if ( woocommerce_product_loop() ) {
+
+if ( have_posts() ) {
 
 	/**
 	 * Hook: woocommerce_before_shop_loop.

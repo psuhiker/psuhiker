@@ -2,13 +2,16 @@
 /**
  * Iran States
  *
- * @package WooCommerce/i18n
- * @version 2.2.3
+ * @author      WooThemes
+ * @category    i18n
+ * @package     WooCommerce/i18n
+ * @version     2.2.3
  */
-
 global $states;
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $states['IR'] = array(
 	'KHZ' => __( 'Khuzestan  (خوزستان)', 'woocommerce' ),

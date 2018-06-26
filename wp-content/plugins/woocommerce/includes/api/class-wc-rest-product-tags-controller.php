@@ -4,11 +4,15 @@
  *
  * Handles requests to the products/tags endpoint.
  *
- * @package WooCommerce/API
- * @since   2.6.0
+ * @author   WooThemes
+ * @category API
+ * @package  WooCommerce/API
+ * @since    2.6.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * REST API Product Tags controller class.

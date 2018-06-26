@@ -6,11 +6,13 @@
  *
  * We suggest using the action woocommerce_cart_calculate_fees hook for adding fees.
  *
+ * @author  Automattic
  * @package WooCommerce/Classes
- * @version 3.2.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * WC_Cart_Fees class.
@@ -78,7 +80,7 @@ final class WC_Cart_Fees {
 	public function add_fee( $args = array() ) {
 		$fee_props            = (object) wp_parse_args( $args, $this->default_fee_props );
 		$fee_props->name      = $fee_props->name ? $fee_props->name : __( 'Fee', 'woocommerce' );
-		$fee_props->tax_class = in_array( $fee_props->tax_class, array_merge( WC_Tax::get_tax_classes(), WC_Tax::get_tax_class_slugs() ), true ) ? $fee_props->tax_class : '';
+		$fee_props->tax_class = in_array( $fee_props->tax_class, array_merge( WC_Tax::get_tax_classes(), WC_Tax::get_tax_class_slugs() ), true ) ? $fee_props->tax_class: '';
 		$fee_props->taxable   = wc_string_to_bool( $fee_props->taxable );
 		$fee_props->amount    = wc_format_decimal( $fee_props->amount );
 
@@ -90,9 +92,7 @@ final class WC_Cart_Fees {
 			return new WP_Error( 'fee_exists', __( 'Fee has already been added.', 'woocommerce' ) );
 		}
 
-		$this->fees[ $fee_props->id ] = $fee_props;
-
-		return $this->fees[ $fee_props->id ];
+		return $this->fees[ $fee_props->id ] = $fee_props;
 	}
 
 	/**

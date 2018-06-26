@@ -4,11 +4,15 @@
  *
  * Action/filter hooks used for WooCommerce functions/templates.
  *
- * @package WooCommerce/Templates
- * @version 2.1.0
+ * @author 		WooThemes
+ * @category 	Core
+ * @package 	WooCommerce/Templates
+ * @version     2.1.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 add_filter( 'body_class', 'wc_body_class' );
 add_filter( 'post_class', 'wc_product_post_class', 20, 3 );
@@ -16,10 +20,10 @@ add_filter( 'post_class', 'wc_product_post_class', 20, 3 );
 /**
  * WP Header.
  *
- * @see wc_generator_tag()
+ * @see  wc_generator_tag()
  */
-add_filter( 'get_the_generator_html', 'wc_generator_tag', 10, 2 );
-add_filter( 'get_the_generator_xhtml', 'wc_generator_tag', 10, 2 );
+add_action( 'get_the_generator_html', 'wc_generator_tag', 10, 2 );
+add_action( 'get_the_generator_xhtml', 'wc_generator_tag', 10, 2 );
 
 /**
  * Content Wrappers.
@@ -212,8 +216,6 @@ add_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form
 add_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 add_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
 add_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
-add_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20 );
-add_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
 
 /**
  * Cart widget
@@ -287,4 +289,3 @@ add_action( 'woocommerce_account_edit-address_endpoint', 'woocommerce_account_ed
 add_action( 'woocommerce_account_payment-methods_endpoint', 'woocommerce_account_payment_methods' );
 add_action( 'woocommerce_account_add-payment-method_endpoint', 'woocommerce_account_add_payment_method' );
 add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_edit_account' );
-add_action( 'woocommerce_register_form', 'wc_registration_privacy_policy_text', 20 );

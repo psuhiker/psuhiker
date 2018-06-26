@@ -4,11 +4,15 @@
  *
  * Handles requests to the products/attributes/<attribute_id>/terms endpoint.
  *
- * @package WooCommerce/API
- * @since   2.6.0
+ * @author   WooThemes
+ * @category API
+ * @package  WooCommerce/API
+ * @since    2.6.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * REST API Product Attribute Terms controller class.

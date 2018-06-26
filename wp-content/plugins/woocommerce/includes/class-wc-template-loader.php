@@ -2,13 +2,16 @@
 /**
  * Template Loader
  *
+ * @class WC_Template
  * @package WooCommerce/Classes
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Template loader class.
+ * WC_Template_Loader.
  */
 class WC_Template_Loader {
 
@@ -193,7 +196,7 @@ class WC_Template_Loader {
 	 * @since 3.3.0
 	 */
 	public static function unsupported_theme_init() {
-		if ( 0 < self::$shop_page_id ) {
+		if ( self::$shop_page_id ) {
 			if ( is_product_taxonomy() ) {
 				self::unsupported_theme_tax_archive_init();
 			} elseif ( is_product() ) {

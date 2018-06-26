@@ -13,6 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Abstract Order Data Store: Stored in CPT.
  *
  * @version  3.0.0
+ * @category Class
+ * @author   WooThemes
  */
 abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP implements WC_Object_Data_Store_Interface, WC_Abstract_Order_Data_Store_Interface {
 
@@ -96,7 +98,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 		$order->set_defaults();
 		$post_object = get_post( $order->get_id() );
 
-		if ( ! $order->get_id() || ! $post_object || ! in_array( $post_object->post_type, wc_get_order_types(), true ) ) {
+		if ( ! $order->get_id() || ! $post_object || ! in_array( $post_object->post_type, wc_get_order_types() ) ) {
 			throw new Exception( __( 'Invalid order.', 'woocommerce' ) );
 		}
 
@@ -131,10 +133,6 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	public function update( &$order ) {
 		$order->save_meta_data();
 		$order->set_version( WC_VERSION );
-
-		if ( null === $order->get_date_created( 'edit' ) ) {
-			$order->set_date_created( current_time( 'timestamp', true ) );
-		}
 
 		$changes = $order->get_changes();
 
@@ -324,7 +322,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 		global $wpdb;
 
 		// Get from cache if available.
-		$items = 0 < $order->get_id() ? wp_cache_get( 'order-items-' . $order->get_id(), 'orders' ) : false;
+		$items = wp_cache_get( 'order-items-' . $order->get_id(), 'orders' );
 
 		if ( false === $items ) {
 			$items = $wpdb->get_results(
@@ -333,9 +331,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 			foreach ( $items as $item ) {
 				wp_cache_set( 'item-' . $item->order_item_id, $item, 'order-items' );
 			}
-			if ( 0 < $order->get_id() ) {
-				wp_cache_set( 'order-items-' . $order->get_id(), $items, 'orders' );
-			}
+			wp_cache_set( 'order-items-' . $order->get_id(), $items, 'orders' );
 		}
 
 		$items = wp_list_filter( $items, array( 'order_item_type' => $type ) );

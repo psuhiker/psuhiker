@@ -84,6 +84,11 @@ class WC_API_Webhooks extends WC_API_Resource {
 		$webhooks = array();
 
 		foreach ( $query['results'] as $webhook_id ) {
+
+			if ( ! $this->is_readable( $webhook_id ) ) {
+				continue;
+			}
+
 			$webhooks[] = current( $this->get_webhook( $webhook_id, $fields ) );
 		}
 

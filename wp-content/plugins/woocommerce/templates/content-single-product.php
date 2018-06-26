@@ -10,15 +10,18 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.0
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     3.0.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Hook: woocommerce_before_single_product.
+ * Hook Woocommerce_before_single_product.
  *
  * @hooked wc_print_notices - 10
  */
@@ -29,7 +32,7 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class(); ?>>
+<div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php
 		/**
@@ -44,7 +47,7 @@ if ( post_password_required() ) {
 	<div class="summary entry-summary">
 		<?php
 			/**
-			 * Hook: woocommerce_single_product_summary.
+			 * Hook: Woocommerce_single_product_summary.
 			 *
 			 * @hooked woocommerce_template_single_title - 5
 			 * @hooked woocommerce_template_single_rating - 10

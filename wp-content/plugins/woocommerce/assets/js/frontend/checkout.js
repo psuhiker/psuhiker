@@ -77,30 +77,21 @@ jQuery( function( $ ) {
 				$payment_methods.eq(0).prop( 'checked', true );
 			}
 
-			if ( $payment_methods.length > 1 ) {
-
-				// Hide open descriptions.
-				$( 'div.payment_box' ).filter( ':visible' ).slideUp( 0 );
-			}
-
 			// Trigger click event for selected method
 			$payment_methods.filter( ':checked' ).eq(0).trigger( 'click' );
 		},
 		get_payment_method: function() {
 			return wc_checkout_form.$checkout_form.find( 'input[name="payment_method"]:checked' ).val();
 		},
-		payment_method_selected: function( e ) {
-			e.stopPropagation();
-
+		payment_method_selected: function() {
 			if ( $( '.payment_methods input.input-radio' ).length > 1 ) {
-				var target_payment_box = $( 'div.payment_box.' + $( this ).attr( 'ID' ) ),
-					is_checked         = $( this ).is( ':checked' );
+				var target_payment_box = $( 'div.payment_box.' + $( this ).attr( 'ID' ) );
 
-				if ( is_checked && ! target_payment_box.is( ':visible' ) ) {
-					$( 'div.payment_box' ).filter( ':visible' ).slideUp( 230 );
+				if ( $( this ).is( ':checked' ) && ! target_payment_box.is( ':visible' ) ) {
+					$( 'div.payment_box' ).filter( ':visible' ).slideUp( 250 );
 
-					if ( is_checked ) {
-						target_payment_box.slideDown( 230 );
+					if ( $( this ).is( ':checked' ) ) {
+						$( 'div.payment_box.' + $( this ).attr( 'ID' ) ).slideDown( 250 );
 					}
 				}
 			} else {
@@ -342,7 +333,7 @@ jQuery( function( $ ) {
 
 					// Save payment details to a temporary object
 					var paymentDetails = {};
-					$( '.payment_box :input' ).each( function() {
+					$( '.payment_box input' ).each( function() {
 						var ID = $( this ).attr( 'id' );
 
 						if ( ID ) {
@@ -369,7 +360,7 @@ jQuery( function( $ ) {
 
 					// Fill in the payment details if possible without overwriting data if set.
 					if ( ! $.isEmptyObject( paymentDetails ) ) {
-						$( '.payment_box :input' ).each( function() {
+						$( '.payment_box input' ).each( function() {
 							var ID = $( this ).attr( 'id' );
 
 							if ( ID ) {
@@ -521,12 +512,24 @@ jQuery( function( $ ) {
 			$( document.body ).trigger( 'checkout_error' );
 		},
 		scroll_to_notices: function() {
-			var scrollElement           = $( '.woocommerce-NoticeGroup-updateOrderReview, .woocommerce-NoticeGroup-checkout' );
+			var scrollElement           = $( '.woocommerce-NoticeGroup-updateOrderReview, .woocommerce-NoticeGroup-checkout' ),
+				isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
 
 			if ( ! scrollElement.length ) {
 				scrollElement = $( '.form.checkout' );
 			}
-			$.scroll_to_notices( scrollElement );
+
+			if ( scrollElement.length ) {
+				if ( isSmoothScrollSupported ) {
+					scrollElement[0].scrollIntoView({
+						behavior: 'smooth'
+					});
+				} else {
+					$( 'html, body' ).animate( {
+						scrollTop: ( scrollElement.offset().top - 100 )
+					}, 1000 );
+				}
+			}
 		}
 	};
 
@@ -646,18 +649,7 @@ jQuery( function( $ ) {
 
 		toggle_terms: function() {
 			if ( $( '.woocommerce-terms-and-conditions' ).length ) {
-				$( '.woocommerce-terms-and-conditions' ).slideToggle( function() {
-					var link_toggle = $( '.woocommerce-terms-and-conditions-link' );
-
-					if ( $( '.woocommerce-terms-and-conditions' ).is( ':visible' ) ) {
-						link_toggle.addClass( 'woocommerce-terms-and-conditions-link--open' );
-						link_toggle.removeClass( 'woocommerce-terms-and-conditions-link--closed' );
-					} else {
-						link_toggle.removeClass( 'woocommerce-terms-and-conditions-link--open' );
-						link_toggle.addClass( 'woocommerce-terms-and-conditions-link--closed' );
-					}
-				} );
-
+				$( '.woocommerce-terms-and-conditions' ).slideToggle();
 				return false;
 			}
 		}
