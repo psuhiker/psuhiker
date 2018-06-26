@@ -116,8 +116,17 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 			$formatted_order_number = ltrim( $order->get_order_number(), '#' );
 			$this->xml_append( $order_xml, 'OrderNumber', $formatted_order_number );
 			$this->xml_append( $order_xml, 'OrderID', $order_id );
-			$order_date = strtotime( $wc_gte_30 ? $order->get_date_created()->date( 'm/d/Y H:i' ) : $order->order_date ) - $tz_offset;
-			$this->xml_append( $order_xml, 'OrderDate', gmdate( 'm/d/Y H:i', $order_date ), false );
+
+			if ( $wc_gte_30 ) {
+				// Sequence of date ordering: date paid > date completed > date created
+				$order_timestamp = $order->get_date_paid() ?: $order->get_date_completed() ?: $order->get_date_created();
+				$order_timestamp = $order_timestamp->getOffsetTimestamp();
+			} else {
+				$order_timestamp = $order->order_date;
+			}
+
+			$order_timestamp -= $tz_offset;
+			$this->xml_append( $order_xml, 'OrderDate', gmdate( 'm/d/Y H:i', $order_timestamp ), false );
 			$this->xml_append( $order_xml, 'OrderStatus', $order->get_status() );
 			$this->xml_append( $order_xml, 'PaymentMethod', $wc_gte_30 ? $order->get_payment_method() : $order->payment_method );
 			$this->xml_append( $order_xml, 'OrderPaymentMethodTitle', $wc_gte_30 ? $order->get_payment_method_title() : $order->payment_method_title );

@@ -131,6 +131,24 @@ class WC_Gateway_First_Data_Payeezy_Credit_Card extends WC_Gateway_First_Data_Pa
 
 
 	/**
+	 * Adds the enable Card Security Code form fields.
+	 *
+	 * Overridden as Payeezy.JS always requires a CSC value.
+	 *
+	 * @see SV_WC_Payment_Gateway::add_csc_form_fields()
+	 *
+	 * @since 4.3.3
+	 *
+	 * @param array $form_fields gateway form fields
+	 * @return array
+	 */
+	protected function add_csc_form_fields( $form_fields ) {
+
+		return $form_fields;
+	}
+
+
+	/**
 	 * Returns an array of form fields specific for the method
 	 *
 	 * @since 4.0.0
@@ -457,6 +475,22 @@ class WC_Gateway_First_Data_Payeezy_Credit_Card extends WC_Gateway_First_Data_Pa
 	 */
 	protected function validate_csc( $field ) {
 
+		return true;
+	}
+
+
+	/**
+	 * Determines if the CSC field is enabled.
+	 *
+	 * Overridden as Payeezy.JS always requires a CSC value.
+	 *
+	 * @see SV_WC_Payment_Gateway::csc_enabled()
+	 *
+	 * @since 4.3.3
+	 *
+	 * @return bool
+	 */
+	public function csc_enabled() {
 		return true;
 	}
 

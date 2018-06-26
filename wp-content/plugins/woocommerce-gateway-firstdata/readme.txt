@@ -2,7 +2,7 @@
 Author: skyverge
 Tags: woocommerce
 Requires at least: 4.4
-Tested up to: 4.9.2
+Tested up to: 4.9.6
 
 Accept credit cards in WooCommerce through the First Data Payeezy (formerly GGe4) or Global Gateway
 

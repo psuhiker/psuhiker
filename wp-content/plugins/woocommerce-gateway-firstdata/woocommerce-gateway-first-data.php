@@ -5,7 +5,7 @@
  * Description: Accept credit cards and eChecks in WooCommerce through First Data Payeezy Gateway, Payeezy, or Global Gateway
  * Author: SkyVerge
  * Author URI: http://www.woocommerce.com/
- * Version: 4.3.1
+ * Version: 4.3.3
  * Text Domain: woocommerce-gateway-firstdata
  * Domain Path: /i18n/languages/
  *
@@ -22,7 +22,7 @@
  *
  * Woo: 18645:eb3e32663ec0810592eaf0d097796230
  * WC requires at least: 2.6.14
- * WC tested up to: 3.3.0
+ * WC tested up to: 3.4.2
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -45,7 +45,7 @@ if ( ! class_exists( 'SV_WC_Framework_Bootstrap' ) ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'lib/skyverge/woocommerce/class-sv-wc-framework-bootstrap.php' );
 }
 
-SV_WC_Framework_Bootstrap::instance()->register_plugin( '4.9.1', __( 'WooCommerce First Data Gateway', 'woocommerce-gateway-firstdata' ), __FILE__, 'init_woocommerce_gateway_first_data', array(
+SV_WC_Framework_Bootstrap::instance()->register_plugin( '4.9.2', __( 'WooCommerce First Data Gateway', 'woocommerce-gateway-firstdata' ), __FILE__, 'init_woocommerce_gateway_first_data', array(
 	'is_payment_gateway'   => true,
 	'minimum_wc_version'   => '2.6.14',
 	'minimum_wp_version'   => '4.4',
@@ -65,7 +65,7 @@ class WC_First_Data extends SV_WC_Payment_Gateway_Plugin {
 
 
 	/** version number */
-	const VERSION = '4.3.1';
+	const VERSION = '4.3.3';
 
 	/** @var WC_First_Data single instance of this plugin */
 	protected static $instance;

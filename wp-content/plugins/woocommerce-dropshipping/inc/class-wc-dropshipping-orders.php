@@ -72,6 +72,8 @@ class WC_Dropshipping_Orders {
 				$info[$key] = $data['value'];
 			}
 		}
+
+
 		// Product Variations
 		$info['variation_data'] = [];
 		if($product->variation_id)
@@ -79,10 +81,11 @@ class WC_Dropshipping_Orders {
 			$info['variation_data'] = $product->get_variation_attributes();
 		}
 		// Product Add-Ons Plugin
-		$info['order_item_meta'] = [];
-                if(function_exists('get_product_addons'))
+		//$info['order_item_meta'] = [];
+		$info['order_item_meta'] = $item->get_formatted_meta_data();
+      if(function_exists('get_product_addons'))
                 {
-			$info['order_item_meta'] = $item->get_formatted_meta_data();
+			//$info['order_item_meta'] = $item->get_formatted_meta_data();
 			$info['product_addons'] = get_product_addons($product);
 			/*for($i=0;$i<count($info['product_addons']);$i++)
 			{
