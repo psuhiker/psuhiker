@@ -1,4 +1,7 @@
 <?php
+
+require_once('inc/wp-modifications.php');
+
 /**
  * Functions.php => This file loads all the needed files for the theme to work properly.
  *

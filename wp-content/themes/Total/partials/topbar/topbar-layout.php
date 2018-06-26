@@ -28,7 +28,7 @@ if ( 'full-width' == wpex_site_layout() && wpex_get_mod( 'top_bar_fullwidth' ) )
 
 	<div id="top-bar-wrap" class="<?php echo esc_attr( $classes ); ?>">
 		<div id="top-bar" class="clr container">
-			<?php wpex_hook_topbar_inner(); ?>
+			<?php //wpex_hook_topbar_inner(); ?>
 		</div><!-- #top-bar -->
 	</div><!-- #top-bar-wrap -->
 

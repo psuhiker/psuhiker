@@ -1,0 +1,5 @@
+#wp-admin-bar-wpseo-menu,
+#wp-admin-bar-wpex_custom_css,
+#wp-admin-bar-delete-cache {
+	display: none;
+}

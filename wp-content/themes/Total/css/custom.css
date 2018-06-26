@@ -1,0 +1,29 @@
+/* Typography */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i');
+
+body, nav {
+	font-family: 'Open Sans', sans-serif !important;
+	font-weight: 300 !important;
+	letter-spacing: 0.05em;
+}
+
+strong, h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+}
+
+/* Removing WordPress Admin Bar Items */
+
+#wp-admin-bar-customize,
+#wp-admin-bar-wpseo-menu,
+#wp-admin-bar-wpex_custom_css,
+#wp-admin-bar-vc_inline-admin-bar-link,
+#wp-admin-bar-delete-cache,
+#wp-admin-bar-new_draft {
+	display: none;
+}
+
+/* Removing Top Bar */
+
+#top-bar {
+	display: none;
+}
