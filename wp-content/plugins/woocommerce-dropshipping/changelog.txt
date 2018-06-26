@@ -1,0 +1,26 @@
+*** WooCommerce Dropshipping Changelog ***
+2017.09.15 - version 1.2.1
+* Fixed packing slip not showing correct order ID
+* Fixed custom packing slip directory points to old plugin name
+
+2017.09.06 - version 1.2.0
+* Fix for can't save CSV Indicator column
+* Add customer company name to supplier email/PDF
+* Fix for WooCommerce Order Number is Not Included on packing slip
+* Add compatibility with Product Add-Ons extension
+
+2017.06.08 - version 1.1.2
+ * Fix - Update the plugin header to include the new Woo keys.
+
+2017.05.25 - version 1.1.1
+
+* Product variation attribute information included on packing slip
+
+2017.02.23 - version 1.1.0
+
+* Adjustable PDF header logo width in settings
+* Product shipping information included on packing slip
+* Product attribute information included on packing slip
+
+2016.10.18 - version 1.0.0
+* Initial release.

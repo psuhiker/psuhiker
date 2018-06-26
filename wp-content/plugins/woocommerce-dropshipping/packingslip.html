@@ -1,0 +1,68 @@
+<h4 align="right"><?php echo 'Order #'.$order_info['id']; ?></h4>
+
+    <table border="0" align="center"  >
+        <tbody>
+            <tr>
+                <td width=100% align="center">
+			<h4><?php echo $order_info['options']['packing_slip_company_name']; ?></h4>
+                    	<?php echo $order_info['options']['packing_slip_address']; ?><br />
+			<?php echo $order_info['options']['packing_slip_customer_service_email']; ?><br />
+			<?php echo $order_info['options']['packing_slip_customer_service_phone']; ?><br /><br />
+                </td>
+            </tr>
+            <tr>
+                <td width=100% align="center">
+			SHIP TO:
+                </td>
+            </tr>
+            <tr>
+                <td width=100% align="center">
+			<?php if(strlen($order_info['shipping_info']['name']) > 0){echo $order_info['shipping_info']['name'].'<br />';} ?>
+			<?php if(strlen($order_info['shipping_info']['shipping_company']) > 0){echo $order_info['shipping_info']['shipping_company'].'<br />';} ?>
+		 	<?php echo $order_info['shipping_info']['shipping_address_1'].'<br />'; ?>
+                	<?php if(strlen($order_info['shipping_info']['shipping_address_2']) > 0) {echo $order_info['shipping_info']['shipping_address_2'].'<br />'; } ?>
+                	<?php echo $order_info['shipping_info']['shipping_city'].' '.$order_info['shipping_info']['shipping_state'].' '.$order_info['shipping_info']['shipping_postcode'].'<br />'; ?>
+			<?php echo $order_info['shipping_info']['phone'].'<br /><br />'; ?>
+			Chosen Shipping Method: <?php echo $order_info['shipping_info']['shipping_method'].'<br />'; ?>
+	        </td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="0" align="center"  >
+        <thead border="0">
+            <tr border="0" >
+                <th border="0" align="left" width="25%"><u>SKU</u></th>
+		<th border="0" align="center" width="50%"></th>
+                <th border="0" align="center" width="25%"><u>Qty</u></th>
+            </tr>
+        </thead>
+        <tbody border="0">
+	<?php 
+		$rows = '';
+		foreach($order_info[$supplier_info['slug']] as $prod_info)
+		{
+			$rows .= '
+			<tr border="0">
+				<td align="left" >'.$prod_info['sku'].'</td>
+				<td align="center" >'.$prod_info['name'];
+				foreach($prod_info['variation_data'] as $key=>$value)
+				{
+					$rows .= ' '.$value;
+				}
+				foreach($prod_info['order_item_meta'] as $meta)
+				{
+					$rows .= '<br /> '.$meta->display_label.': '.trim($meta->value);
+				}
+			$rows .= '</td>
+				<td align="center" >'.$prod_info['qty'].'</td>
+			</tr>';
+		} 
+		echo $rows;
+	?>
+        </tbody>
+    </table>
+<pre>
+	<?php //var_dump($order_info); ?>
+</pre>
+<br>
+<h4 align="center"><?php echo $order_info['options']['packing_slip_thankyou']; ?></h4>
