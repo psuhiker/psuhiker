@@ -1,6 +1,7 @@
 <?php
 
 require_once('inc/wp-modifications.php');
+require_once('inc/menus.php');
 
 /**
  * Functions.php => This file loads all the needed files for the theme to work properly.

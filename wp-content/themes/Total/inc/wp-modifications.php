@@ -91,4 +91,15 @@ function my_admin_menu() {
     remove_admin_menu_section('options-writing.php');
     remove_admin_menu_section('Profile');
     
+    // Adds Sections
+      add_menu_page(
+        __( 'Site Menu', 'textdomain' ),
+            'Navigation',
+            'manage_options',
+            'nav-menus.php',
+            '',
+            'dashicons-menu',
+            '40'
+        );
+    
 }
