@@ -25,6 +25,10 @@
 	        
 	        	<?php include (TEMPLATEPATH . '/includes/blocks.php' ); ?>
 	
+	        <?php } elseif( get_row_layout() == 'featured' ) { ?>
+	                
+	            <?php include (TEMPLATEPATH . '/includes/featured.php' ); ?>
+	        
 	        <?php } elseif( get_row_layout() == 'quotes' ) { ?>
 	                
 	            <?php include (TEMPLATEPATH . '/includes/quotes.php' ); ?>

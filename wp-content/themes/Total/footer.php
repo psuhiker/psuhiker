@@ -19,11 +19,16 @@
         
                 <h3>Sign up for special discounts and offers</h3>
         
-                <form class="form">
+                <form action="https://bioluxe.us17.list-manage.com/subscribe/post?u=573907f4515bac5749dc6956d&amp;id=6dd691ce7b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form" target="_blank" novalidate>
         
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="email address">
-                        <input type="submit" class="form-submit">
+						<input type="email" value="" name="EMAIL" class="form-control required email" id="mce-EMAIL"placeholder="email address">
+						<div id="mce-responses" class="clear" style="display: none;">
+							<div class="response" id="mce-error-response" style="display:none"></div>
+							<div class="response" id="mce-success-response" style="display:none"></div>
+						</div>
+						<div style="display:  none;" aria-hidden="true"><input type="text" name="b_573907f4515bac5749dc6956d_6dd691ce7b" tabindex="-1" value=""></div>
+						<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button form-submit">
                         <div class="clear"></div>
                     </div>
         
@@ -130,6 +135,51 @@
 <?php wpex_outer_wrap_after(); ?>
 
 <?php wp_footer(); ?>
+
+<!-- Mobile Primary Menu -->
+<script>
+	$(".mobileToggle").on("click", function() {
+	    $("body").toggleClass("active");
+	});
+	$(".toggleSearch").on("click", function() {
+	    $("#search-wrapper").toggleClass("active");
+	});
+</script>
+
+<!-- Equal Height Divs -->
+<script>
+	$(document).ready(function () {
+	
+	    "use strict";
+	    $('.featured-products').each(function () {
+	        var highestBox = 0;
+	
+	        $(this).find('.product-inner').each(function () {
+	            if ($(this).height() > highestBox) {
+	                highestBox = $(this).height();
+	            }
+	        });
+	
+	        $(this).find('.product-inner').height(highestBox);
+			
+	    });
+		
+		$('.featured-products').each(function () {
+		        var highestBox = 0;
+		
+		    $(this).find('.woocommerce-loop-product__title').each(function () {
+		        if ($(this).height() > highestBox) {
+		            highestBox = $(this).height();
+		        }
+		    });
+		
+		    $(this).find('.woocommerce-loop-product__title').height(highestBox);
+		});
+		
+	});
+	
+	
+</script>
 
 </body>
 </html>
