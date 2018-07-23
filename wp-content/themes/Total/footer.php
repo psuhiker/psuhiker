@@ -44,6 +44,27 @@
                 <div class="logo">
                     <div class="content">
                         <img src="<?php bloginfo('template_directory'); ?>/images/logo-white.png">
+						<div class="clear"><br></div>
+						
+						                <h4>Connect with Us</h4>
+						
+						                <ul class="social">
+						                    <li>
+						                        <a href="http://www.twitter.com/cbd_connection" target="_blank">
+						                            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-twitter.png">
+						                        </a>
+						                    </li>
+						                    <li>
+						                        <a href="http://www.facebook.com/cbdconnectionresource" target="_blank">
+						                            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-facebook.png">
+						                        </a>
+						                    </li>
+						                    <li>
+						                        <a href="http://www.instagram.com/cbdconnection" target="_blank">
+						                            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-instagram.png">
+						                        </a>
+						                    </li>
+						                </ul>
                     </div>
                 </div>
         
@@ -62,28 +83,6 @@
                                 Help & Support
                             </a>
                         </p>-->
-        
-                        <div class="clear"><br></div>
-        
-                        <h4>Connect with Us</h4>
-        
-                        <ul class="social">
-                            <li>
-                                <a href="http://www.twitter.com/cbd_connection" target="_blank">
-                                    <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-twitter.png">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://www.facebook.com/cbdconnectionresource" target="_blank">
-                                    <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-facebook.png">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://www.instagram.com/cbdconnection" target="_blank">
-                                    <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-instagram.png">
-                                </a>
-                            </li>
-                        </ul>
         
                     </div>
                 </div>

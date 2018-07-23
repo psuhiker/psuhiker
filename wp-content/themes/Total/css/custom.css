@@ -37,6 +37,7 @@ body, nav {
 
 strong, h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
+	font-size: 2em;
 }
 
 .text-center {
@@ -131,9 +132,10 @@ ul.products {
 /* Links */
 
 .button {
-	background-color: #000;
+	background-color: #fff;
 	text-shadow: none;
-	color: #fff;
+	color: #000e28;
+	border:  2px solid #000e28;
 	padding: 10px 30px;
 	display: inline-block;
 	webkit-transition: all 0.5s ease-in;
@@ -142,12 +144,13 @@ ul.products {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+	font-weight: bold;
 }
 
 	.button:hover {
 		text-decoration: none;
+		background-color: #000e28;
 		color: #fff;
-		background-color: rgba(0,0,0,0.5);
 		webkit-transition: all 0.5s ease-in;
 		-moz-transition: all 0.5s ease-in;
 		transition: all 0.5s ease-in;
@@ -168,7 +171,7 @@ ul.products {
 	}
 	
 		#header #logo img {
-			width:  250px;
+			width:  325px;
 			height: auto;
 		}
 		
@@ -267,17 +270,18 @@ ul.products {
 			}
 		
 			#header #menu-customer a.cart-contents .badge {
-				background-color: red;
-				color: #fff;
+				background-color: #fff;
+				color: #000e28;
 				font-size: 8pt;
-				padding: 2px 8px;
+				padding: 1px 6px;
 				-webkit-border-radius: 50%;
 				-moz-border-radius: 50%;
 				border-radius: 50%;
 				position: absolute;
 				display: inline-block;
-				right: -15px;
-				bottom: -5px;
+				right: -12px;
+				bottom: -8px;
+				border:  2px solid green;
 			}
 		
 			#header #menu-customer a {
@@ -670,11 +674,16 @@ ul.products {
 /* Custom Page Sections */
 
 section.blocks {
-    background-color: #eff0f1;
-    padding: 40px 0px;
+    padding: 20px 0px;
 	width: 100%;
 	display: block;
 }
+
+	section.blocks .intro {
+		font-size: 16pt;
+		max-width: 1000px;
+		margin: 0px auto;
+	}
 
     section.blocks .block-row {
         margin-bottom: 30px;
@@ -872,7 +881,6 @@ section.quotes {
 section.subscribe {
     padding: 100px 0px;
     text-align: center;
-    background-color: #eff0f1;
 }
 
     section.subscribe h3 {
@@ -885,7 +893,7 @@ section.subscribe {
     }
 		
 section.text {
-    padding: 50px 0px;
+    padding: 25px 0px;
 }
 
     section.text .column {
@@ -965,8 +973,13 @@ footer#footer {
     footer#footer .logo {
         width: 25%;
         float: left;
-        text-align: center;
+        /*text-align: center;*/
     }
+	
+		footer#footer .logo h4 {
+			color: #fff !important;
+			font-size: 14pt;
+		}
 
         @media all and (max-width: 1023px) {
             footer#footer .logo {
@@ -1037,22 +1050,23 @@ footer#footer {
                 margin-bottom: 5px;
             }
 
-        footer#footer .contact ul.social {
+        footer#footer ul.social {
             display: inline;
             list-style: none;
             margin: 0px;
             padding: 0px;
+			color: #fff;
         }
 
-            footer#footer .contact ul.social li {
+            footer#footer ul.social li {
                 display: inline;
             }
 
-                footer#footer .contact ul.social li img {
+                footer#footer ul.social li img {
                     width: 30px;
                 }
 
-                footer#footer .contact ul.social li a {
+                footer#footer ul.social li a {
                     text-decoration: none;
                     margin: 0px 5px 0px 0px;
                     webkit-transition: all 0.2s ease-in;
@@ -1060,7 +1074,7 @@ footer#footer {
                     transition: all 0.2s ease-in;
                 }
 
-                    footer#footer .contact ul.social li a:hover {
+                    footer#footer ul.social li a:hover {
                         opacity: 0.65;
                     }
 
@@ -1115,7 +1129,7 @@ section#disclaimer {
 /* Featured Products */
 
 section.featured-products {
-	padding: 50px 0px;
+	padding: 25px 0px;
 	background-color: #eff0f1;
 }
 
@@ -1171,19 +1185,25 @@ section.featured-products {
 					transition: all 0.2s ease-in;
 				}
 				
+					section.featured-products ul li .product-inner .amount {
+						display: none;
+					}
+				
 					section.featured-products ul li .product-inner .price {
-						padding-bottom: 10px;
-						display: block;
+						/*padding-bottom: 10px;
+						display: block;*/
+						display: none;
 					}
 					
 					section.featured-products ul li .product-inner .button {
 						padding:  5px 10px;
-						background-color: #000e28;
+						/*background-color: #000e28;
+						color: #fff;*/
 					}
 					
 						section.featured-products ul li .product-inner .button:hover {
-							background-color: #bfc3c9;
-							color: #000e28;
+							/*background-color: #fff;
+							color: #000e28;*/
 						}
 			
 				section.featured-products ul li .product-inner h2 {

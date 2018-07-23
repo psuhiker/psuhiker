@@ -10,7 +10,9 @@
                         <h2><?php the_sub_field('blocks_headline'); ?></h2>
                     <?php } ?>
                     <?php if( get_sub_field('blocks_intro') ) { ?>
-                        <?php the_sub_field('blocks_intro'); ?>
+						<div class="intro">
+							<?php the_sub_field('blocks_intro'); ?>
+						</div>
                     <?php } ?>
                 </div>
             </div>
