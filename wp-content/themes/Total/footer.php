@@ -16,23 +16,53 @@
         <section class="subscribe">
         
             <div class="container">
+				
+				<div class="social">
+					
+					<h3>Connect with Us</h3>
+					
+					<ul class="social">
+					    <li>
+					        <a href="http://www.twitter.com/cbd_connection" target="_blank">
+					            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-twitter-blue.png">
+					        </a>
+					    </li>
+					    <li>
+					        <a href="http://www.facebook.com/cbdconnectionresource" target="_blank">
+					            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-facebook-blue.png">
+					        </a>
+					    </li>
+					    <li>
+					        <a href="http://www.instagram.com/cbdconnection" target="_blank">
+					            <img src="<?php bloginfo('template_directory'); ?>/images/social-icon-instagram-blue.png">
+					        </a>
+					    </li>
+					</ul>
+					
+				</div>
+				
+				<div class="email">
         
-                <h3>Sign up for special discounts and offers</h3>
-        
-                <form action="https://bioluxe.us17.list-manage.com/subscribe/post?u=573907f4515bac5749dc6956d&amp;id=6dd691ce7b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form" target="_blank" novalidate>
-        
-                    <div class="form-group">
-						<input type="email" value="" name="EMAIL" class="form-control required email" id="mce-EMAIL"placeholder="email address">
-						<div id="mce-responses" class="clear" style="display: none;">
-							<div class="response" id="mce-error-response" style="display:none"></div>
-							<div class="response" id="mce-success-response" style="display:none"></div>
-						</div>
-						<div style="display:  none;" aria-hidden="true"><input type="text" name="b_573907f4515bac5749dc6956d_6dd691ce7b" tabindex="-1" value=""></div>
-						<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button form-submit">
-                        <div class="clear"></div>
-                    </div>
-        
-                </form>
+	                <h3>Sign up for special discounts and offers</h3>
+	        
+	                <form action="https://bioluxe.us17.list-manage.com/subscribe/post?u=573907f4515bac5749dc6956d&amp;id=6dd691ce7b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form" target="_blank" novalidate>
+	        
+	                    <div class="form-group">
+							<input type="email" value="" name="EMAIL" class="form-control required email" id="mce-EMAIL"placeholder="email address">
+							<div id="mce-responses" class="clear" style="display: none;">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>
+							<div style="display:  none;" aria-hidden="true"><input type="text" name="b_573907f4515bac5749dc6956d_6dd691ce7b" tabindex="-1" value=""></div>
+							<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button form-submit">
+	                        <div class="clear"></div>
+	                    </div>
+	        
+	                </form>
+				
+				</div>
+				
+				<div class="clear"></div>
         
             </div>
         
@@ -45,8 +75,6 @@
                     <div class="content">
                         <img src="<?php bloginfo('template_directory'); ?>/images/logo-white.png">
 						<div class="clear"><br></div>
-						
-						                <h4>Connect with Us</h4>
 						
 						                <ul class="social">
 						                    <li>
@@ -178,6 +206,15 @@
 	});
 	
 	
+</script>
+
+<script>
+	$('.product-inner .button').each(function() {
+	    var text = $(this).text();
+	    $(this).text(text.replace('Add to cart', 'Shop')); 
+	    var text = $(this).text();
+	    $(this).text(text.replace('Select options', 'Shop')); 
+	});
 </script>
 
 </body>

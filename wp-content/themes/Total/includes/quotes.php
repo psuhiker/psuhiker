@@ -1,11 +1,11 @@
 <section class="quotes">
 	
-	<div class="container">
-	
-		<?php if( have_rows('quotes_quote') ): ?>
-			<?php while ( have_rows('quotes_quote') ) : the_row(); ?>
+	<?php if( have_rows('quotes_quote') ): ?>
+		<?php while ( have_rows('quotes_quote') ) : the_row(); ?>
 			
-				<div class="quote">
+			<div class="quote" style="background-image: url(<?php the_sub_field('quotes_quote_bg'); ?>);">
+				
+				<div class="container">
 		
 					<div class="quote-text">
 						<?php the_sub_field('quotes_quote_quote'); ?>
@@ -19,9 +19,9 @@
 				
 				</div>
 				
-			<?php endwhile; ?>
-		<?php else : endif; ?>
-	
-	</div>
+			</div>
+				
+		<?php endwhile; ?>
+	<?php else : endif; ?>
 	
 </section>

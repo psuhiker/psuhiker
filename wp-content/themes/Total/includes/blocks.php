@@ -20,6 +20,8 @@
         </div>
 
     <?php } ?>
+	
+	<div class="clearfix"></div>
 
     <?php if( have_rows('blocks_row') ): ?>
         <?php while ( have_rows('blocks_row') ) : the_row(); ?>

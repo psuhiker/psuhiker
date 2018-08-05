@@ -25,6 +25,12 @@
 
 
 /* Typography */
+
+body.active #wpadminbar {
+	display: none;
+}
+
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i');
 
 body, nav {
@@ -217,7 +223,7 @@ ul.products {
 				}
 			}
 		
-			#header #navigation a:after {
+			/*#header #navigation a:after {
 				content: "";
 				width: 0%;
 				left: 50%;
@@ -228,7 +234,7 @@ ul.products {
 				-moz-transition: all 1s;
 				display: block;
 				margin-top: 5px;
-			}
+			}*/
 		
 			#header #navigation a:hover {
 				text-decoration: none;
@@ -236,15 +242,16 @@ ul.products {
 				-webkit-transition: all 1s;
 				-moz-transition: all 1s;
 				color: #263248;
+				opacity: 0.5;
 			}
 			
-				#header #navigation a:hover:after {
+				/*#header #navigation a:hover:after {
 					width: 100%;
 					left: 0%;
 					transition: all 1s;
 					-webkit-transition: all 1s;
 					-moz-transition: all 1s;
-				}
+				}*/
 				
 		#header #menu-customer {
 			top:  35px;
@@ -373,8 +380,9 @@ ul.products {
 				#header #navigation #menu-shop ul li {
 					list-style: none;
 					display: inline;
-					margin: 0;
+					margin: 0 10px 0 0;
 					padding: 0;
+					position: relative;
 				}
 				
 					#header #navigation #menu-shop ul li ul {
@@ -384,6 +392,8 @@ ul.products {
 						background-color: #fff;
 						box-shadow: 0px 3px 5px #444;
 						padding: 10px;
+						left: 0;
+						width: 200px;
 					}
 					
 						#header #navigation #menu-shop ul li ul li {
@@ -392,6 +402,8 @@ ul.products {
 						
 							#header #navigation #menu-shop ul li ul li a {
 								padding: 5px 0px;
+								text-transform: none;
+								font-weight: 500;
 							}
 						
 							#header #navigation #menu-shop ul li ul li a:hover {
@@ -526,6 +538,7 @@ ul.products {
 	top: -55px;
 	right: 20px;
 	padding: 10px;
+	border:  none;
 }
 
 	@media all and (min-width: 769px) {
@@ -694,14 +707,14 @@ section.blocks {
     }
     
     section.blocks .block-wrapper {
-		width: 25%;
+		width: 33.33%;
 		float: left;
 		padding:  10px;
 	}
 
     section.blocks .block {
-        padding: 15px;
-        height: 15vw;
+        padding: 20px;
+        height: 20vw;
         text-align: center;
         position: relative;
         color: #fff;
@@ -856,26 +869,36 @@ section.marquee {
 	
 section.quotes {
 	width: 100%;
-	padding: 100px 0;
+	padding: 0;
 	clear: both;
 }
 
 	section.quotes .quote {
-		
+		padding: 25vh 0;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 	}
 	
 		section.quotes .quote .quote-text {
-			text-align: center;
-			width: 90%;
-			margin: 0px auto 25px auto;
+			text-align: right;
+			width: 60%;
+			margin: 0px auto 25px 30%;
 			font-size: 32pt;
 			line-height: 1.5;
 			font-weight: 100 !important;
+			color: #fff;
+			text-shadow: 1px 1px #000;
 		}
 		
 		section.quotes .quote .source {
 			text-align: right;
 			text-transform: uppercase;
+				text-align: right;
+				width: 60%;
+				margin: 0px auto 25px 30%;
+				color: #fff;
+				text-shadow: 1px 1px #000;
 		}
 		
 section.subscribe {
@@ -885,12 +908,69 @@ section.subscribe {
 
     section.subscribe h3 {
         margin-top: 0px;
+		font-size: 14pt;
+		font-weight: 100;
     }
 
     section.subscribe .form {
         width: 400px;
         margin: 0 auto;
     }
+	
+		@media all and (max-width: 500px) {
+			section.subscribe .form {
+				width: 90%;
+			}
+		}
+	
+	section.subscribe div.social {
+		float: left;
+		width: 33%;
+	}
+	
+	section.subscribe div.email {
+		float: left;
+		width: 66%;
+	}
+	
+		@media all and (max-width: 767px) {
+			section.subscribe div.social,
+			section.subscribe div.email {
+				width: 100%;
+				float: none;
+			}
+			section.subscribe div.social {
+				margin-bottom: 40px;
+			}
+		}
+	
+	section.subscribe ul.social {
+	            display: inline;
+	            list-style: none;
+	            margin: 0px;
+	            padding: 0px;
+				color: #fff;
+	        }
+	
+	            section.subscribe ul.social li {
+	                display: inline;
+	            }
+	
+	                section.subscribe ul.social li img {
+	                    width: 30px;
+	                }
+	
+	                section.subscribe ul.social li a {
+	                    text-decoration: none;
+	                    margin: 0px 5px 0px 0px;
+	                    webkit-transition: all 0.2s ease-in;
+	                    -moz-transition: all 0.2s ease-in;
+	                    transition: all 0.2s ease-in;
+	                }
+	
+	                    section.subscribe ul.social li a:hover {
+	                        opacity: 0.65;
+	                    }
 		
 section.text {
     padding: 25px 0px;
@@ -1183,6 +1263,7 @@ section.featured-products {
 					webkit-transition: all 0.2s ease-in;
 					-moz-transition: all 0.2s ease-in;
 					transition: all 0.2s ease-in;
+					overflow: hidden;
 				}
 				
 					section.featured-products ul li .product-inner .amount {
@@ -1196,14 +1277,33 @@ section.featured-products {
 					}
 					
 					section.featured-products ul li .product-inner .button {
-						padding:  5px 10px;
+						padding:  3px 20px;
 						/*background-color: #000e28;
 						color: #fff;*/
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						border-radius: 3px;
+						font-weight: normal;
 					}
 					
 						section.featured-products ul li .product-inner .button:hover {
 							/*background-color: #fff;
 							color: #000e28;*/
+						}
+						
+						section.featured-products ul li .product-inner img {
+							-webkit-transition-duration: 0.5s;
+							-moz-transition-duration: 0.5s;
+							-o-transition-duration: 0.5s;
+							transition-duration: 0.5s;
+						}
+						
+						section.featured-products ul li .product-inner:hover img {
+							transform: scale(1.1);
+							-webkit-transition-duration: 0.5s;
+							-moz-transition-duration: 0.5s;
+							-o-transition-duration: 0.5s;
+							transition-duration: 0.5s;
 						}
 			
 				section.featured-products ul li .product-inner h2 {
