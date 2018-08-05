@@ -871,6 +871,9 @@ section.quotes {
 	width: 100%;
 	padding: 0;
 	clear: both;
+	position: relative;
+	height: 80vh;
+	display: table;
 }
 
 	section.quotes .quote {
@@ -878,6 +881,13 @@ section.quotes {
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: table-cell;
+		height: 100%;
+		vertical-align: middle;
+		width: 100%;
 	}
 	
 		section.quotes .quote .quote-text {
