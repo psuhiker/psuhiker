@@ -22,6 +22,9 @@
 	}
 	
 
+.hidden {
+	display: none !important;
+}
 
 
 /* Typography */
@@ -1220,7 +1223,7 @@ section#disclaimer {
 
 section.featured-products {
 	padding: 25px 0px;
-	background-color: #eff0f1;
+	/*background-color: #eff0f1;*/
 }
 
 	section.featured-products ul {
