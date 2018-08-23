@@ -45,7 +45,7 @@
 				
 					<div id="logo">
 						<a href="<?php echo site_url(); ?>">
-							<img src="<?php bloginfo('template_directory'); ?>/images/logo.png" alt="CBD Connection" class="logo-img" data-no-retina="" width="681" height="151">
+							<img src="<?php bloginfo('template_directory'); ?>/images/logo-no-tagline.png" alt="CBD Connection" class="logo-img" data-no-retina="" width="681" height="151">
 						</a>
 					</div>
 					

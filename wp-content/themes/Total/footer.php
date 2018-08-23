@@ -140,13 +140,13 @@
             <div class="container">
         
                 <p><strong>FDA Disclosure</strong></p>
-                <p>The statements made regarding these products have not been evaluated by the Food & Drug Administration. The efficacy of these products has not been confirmed by FDA approved research. These products are not intended to diagnose, treat, cure, or prevent any disease. All information presented here is not meants as a substitute for or alternative to information from healthcare practitioners. Please consult your healthcare professional about potential interactions or other possible complications before using any product. The Federal Food, Drug and Cosmetic Act requires this notice.</p>
+                <p>The statements made regarding these products have not been evaluated by the Food & Drug Administration. The efficacy of these products has not been confirmed by FDA approved research. These products are not intended to diagnose, treat, cure, or prevent any disease. All information presented here is not meant as a substitute for or alternative to information from healthcare practitioners. Please consult your healthcare professional about potential interactions or other possible complications before using any product. The Federal Food, Drug and Cosmetic Act requires this notice.</p>
         
                 <p><strong>Allergies</strong></p>
-                <p>Please be aware that certain products may contain soy, nut, essintial oils and/or infused with herbs. Please check to make sure you are not allergic to any of the ingredients.</p>
+                <p>Please be aware that certain products may contain soy, nuts, essential oils and/or infused with herbs. Please check to make sure you are not allergic to any of the ingredients.</p>
         
                 <p><strong>Storage Suggestion</strong></p>
-                <p>We recommend keepign products containing CBD or essential oils away from heat and direct sunlight.</p>
+                <p>We recommend keeping products containing CBD or essential oils away from heat and direct sunlight.</p>
         
             </div>
         </section>
@@ -202,6 +202,46 @@
 		
 		    $(this).find('.woocommerce-loop-product__title').height(highestBox);
 		});
+		
+		
+		
+	});
+	
+	$(window).resize(function() {
+		
+		$('.woocommerce-loop-product__title').css('height','inherit');
+		
+		$('.featured-products').each(function () {
+	        var highestBox = 0;
+	
+	        $(this).find('.woocommerce-loop-product__title').each(function () {
+	            if ($(this).height() > highestBox) {
+	                highestBox = $(this).height();
+	            }
+	        });
+	
+	        $(this).find('.woocommerce-loop-product__title').height(highestBox);
+	        
+	    });
+		
+	});
+	
+	$(window).resize(function() {
+		
+		$('.product-inner').css('height','inherit');
+		
+		$('.featured-products').each(function () {
+	        var highestBox = 0;
+	
+	        $(this).find('.product-inner').each(function () {
+	            if ($(this).height() > highestBox) {
+	                highestBox = $(this).height();
+	            }
+	        });
+	
+	        $(this).find('.product-inner').height(highestBox);
+	        
+	    });
 		
 	});
 	

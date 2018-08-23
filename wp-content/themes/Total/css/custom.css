@@ -154,6 +154,7 @@ ul.products {
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	font-weight: bold;
+	font-size:  12pt;
 }
 
 	.button:hover {
@@ -180,7 +181,7 @@ ul.products {
 	}
 	
 		#header #logo img {
-			width:  325px;
+			width:  375px;
 			height: auto;
 		}
 		
@@ -714,6 +715,13 @@ section.blocks {
 		float: left;
 		padding:  10px;
 	}
+	
+		@media all and (max-width: 767px) {
+			section.blocks .block-wrapper {
+				width: 100%;
+				float: none;
+			}
+		}
 
     section.blocks .block {
         padding: 20px;
@@ -817,6 +825,10 @@ section.blocks {
         position: relative;
         text-shadow: 1px 1px #000;
     }
+	
+		section.blocks .block-row a:hover {
+			text-decoration: none;
+		}
 
         section.blocks .block-content h3 {
             font-size: 1.5em !important;
@@ -914,6 +926,25 @@ section.quotes {
 				text-shadow: 1px 1px #000;
 		}
 		
+			@media all and (max-width: 1023px) {
+				section.quotes .quote .quote-text {
+					font-size: 24pt;
+					margin: 0px 5%;
+					width: 90%;
+				}
+				section.quotes .quote .source {
+					margin: 0px 5% 25px 5%;
+					width:  90%;
+				}
+			}
+			
+			@media all and (max-width: 600px) {
+				section.quotes .quote .quote-text {
+					font-size: 18pt;
+				}
+			}
+			
+		
 section.subscribe {
     padding: 100px 0px;
     text-align: center;
@@ -989,13 +1020,39 @@ section.text {
     padding: 25px 0px;
 }
 
-    section.text .column {
+	section.text .column {
+		float: left;
+	}
+	
+		section.text.one.column .column {
+			width: 100%;
+		}
+		
+		section.text.two.column .column {
+			width: 50%;
+		}
+		
+		section.text.three.column .column {
+			width: 33%;
+		}
+		
+		@media all and (max-width: 767px) {
+		    section.text.one.column .column,
+		    section.text.two.column .column,
+		    section.text.three.column .column {
+		        width: 100%;
+		        float: none;
+		    }
+		}
+
+    /*section.text .column {
         width: 50%;
         float: left;
     }
 
         @media all and (max-width: 767px) {
-            section.text .column {
+            section.text .column,
+            section.text {
                 width: 100%;
                 float: none;
             }
@@ -1020,11 +1077,15 @@ section.text {
                     margin-right: 5%;
                     float: left;
                 }
-            }
+            }*/
 
         section.text .column .content {
             padding: 0px 20px;
         }
+		
+	section.text h3.headline {
+		text-align: center;
+	}
 
     section.text h1, section.text h2, section.text h3 {
         margin-top: 0;
@@ -1033,7 +1094,7 @@ section.text {
 /* Footer */
 
 footer#footer {
-    padding: 50px 0px;
+    padding: 50px 0px 30px 0px;
     background-color: #000e28;
     color: #fff;
 }
@@ -1214,7 +1275,7 @@ footer#footer {
 section#disclaimer {
     background-color: #000e28;
     color: #fff;
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     font-size: 8pt;
     font-weight: 100;
 }
@@ -1261,7 +1322,7 @@ section.featured-products {
 			section.featured-products ul li .product-inner {
 				padding: 10px;
 				background-color: #fff;
-				box-shadow: 0px 3px 5px rgba(0,0,0,0.25);
+				/*box-shadow: 0px 3px 5px rgba(0,0,0,0.25);*/
 				margin:  10px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;
@@ -1272,7 +1333,7 @@ section.featured-products {
 			}
 			
 				section.featured-products ul li:hover .product-inner {
-					box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+					/*box-shadow: 0px 3px 5px rgba(0,0,0,0.5);*/
 					webkit-transition: all 0.2s ease-in;
 					-moz-transition: all 0.2s ease-in;
 					transition: all 0.2s ease-in;
@@ -1297,6 +1358,10 @@ section.featured-products {
 						-moz-border-radius: 3px;
 						border-radius: 3px;
 						font-weight: normal;
+						text-align: center;
+						margin: 0px auto;
+						display: block;
+						width: 90px;
 					}
 					
 						section.featured-products ul li .product-inner .button:hover {
@@ -1355,6 +1420,21 @@ section.featured-products {
 	display: table-cell;
 	height: 100%;
 	vertical-align: middle;
+}
+
+#sidebar .widget_nav_menu a, #sidebar .widget_nav_menu ul >li:first-child >a {
+    border: none;
+
+}
+
+#sidebar .widget_nav_menu a, #sidebar .widget_nav_menu ul >li {
+    margin: 0px;
+    padding: 0px;
+    font-size: 12pt;
+}
+
+.sidebar-box .widget-title {
+    color: #000;
 }
 
 /* Removing WordPress Admin Bar Items */

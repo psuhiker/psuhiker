@@ -22,8 +22,10 @@
 		 	<?php echo $order_info['shipping_info']['shipping_address_1'].'<br />'; ?>
                 	<?php if(strlen($order_info['shipping_info']['shipping_address_2']) > 0) {echo $order_info['shipping_info']['shipping_address_2'].'<br />'; } ?>
                 	<?php echo $order_info['shipping_info']['shipping_city'].' '.$order_info['shipping_info']['shipping_state'].' '.$order_info['shipping_info']['shipping_postcode'].'<br />'; ?>
-			<?php echo $order_info['shipping_info']['phone'].'<br /><br />'; ?>
+			<?php echo $order_info['shipping_info']['phone'].'<br />'; ?>
+                        <?php echo $order_info['order']->customer_note.'<br /><br />'; ?>
 			Chosen Shipping Method: <?php echo $order_info['shipping_info']['shipping_method'].'<br />'; ?>
+                        
 	        </td>
             </tr>
         </tbody>
@@ -62,7 +64,8 @@
         </tbody>
     </table>
 <pre>
-	<?php //var_dump($order_info); ?>
+	<?php //var_dump($order_info); exit(); 
+?>
 </pre>
 <br>
 <h4 align="center"><?php echo $order_info['options']['packing_slip_thankyou']; ?></h4>
