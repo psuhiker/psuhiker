@@ -1437,6 +1437,25 @@ section.featured-products {
     color: #000;
 }
 
+.sidebar-widget-icons .widget_product_categories a:before {
+    display: none !important;
+}
+.sidebar-widget-icons .widget_product_categories a {
+    font-size: 12pt;
+    color: #777 !important;
+    display: block;
+    padding: 2px 0px;
+}
+.sidebar-widget-icons .widget_product_categories a:hover {
+    background-color: #f9f9f9;
+    text-decoration: none;
+}
+    
+#main .widget_product_categories li {
+    border: none;
+    padding: 0px;
+}
+
 /* Removing WordPress Admin Bar Items */
 
 #wp-admin-bar-customize,
